@@ -36,7 +36,7 @@ module SocialButtons
         widgetized! :like
         [
           "<script src=#{js_sdk} type='text/javascript'></script>",
-          "<script>FB.init({ appId: '#{app_id}', status: true, cookie: true, xfbml: true });</script>",
+          "<script>window.fbAsyncInit = function() { FB.init({ appId: '#{app_id}', status: true, cookie: true, xfbml: true }); };</script>",
         ].join.html_safe
       end
 
