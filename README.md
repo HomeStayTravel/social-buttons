@@ -186,3 +186,8 @@ Copyright (c) 2012 Kristian Mandrup & Yuva Kumar
 Copyright (c) 2010 Jeremy McAnally. 
 
 See LICENSE for details.
+
+Other
+---
+
+This fork is in use at [Homestay.com](http://www.homestay.com).
