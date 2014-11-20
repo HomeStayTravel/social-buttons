@@ -6,7 +6,7 @@ module SocialButtons
 
     CLASS = "g-plusone"
 
-    # http://www.google.com/intl/en/webmasters/+1/button/index.html
+    # https://www.google.com/intl/en/webmasters/+1/button/index.html
 
     # Async script mode:
     #   To only output script
@@ -59,7 +59,7 @@ module SocialButtons
 
       def language lang = nil
         "window.___gcfg = {lang: '#{lang}'};" if lang
-      end     
+      end
     end
 
 

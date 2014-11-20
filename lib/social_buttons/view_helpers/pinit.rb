@@ -2,8 +2,8 @@ module SocialButtons
   module Pinit
     include SocialButtons::Assistant
 
-    PINIT_CREATE_BUTTON = "http://pinterest.com/pin/create/button/"
-    PINIT_BUTTON_IMAGE  = "http://assets.pinterest.com/images/PinExt.png"
+    PINIT_CREATE_BUTTON = "https://pinterest.com/pin/create/button/"
+    PINIT_BUTTON_IMAGE  = "https://assets.pinterest.com/images/PinExt.png"
     CLASS = "pin-it-button"
     TITLE = "Pin It"
 
@@ -36,7 +36,7 @@ module SocialButtons
     class Scripter < SocialButtons::Scripter
       def script
         return empty_content if widgetized? :pinit
-        widgetized! :pinit        
+        widgetized! :pinit
         "<script src=#{pinit_js} type='text/javascript'></script>".html_safe
       end
 
