@@ -1,6 +1,6 @@
 module SocialButtons
   def self.names
-    %w{pinit tweet like google_plus}
+    %w{pinit tweet like share google_plus}
   end
 
   def self.helpers
@@ -11,14 +11,14 @@ module SocialButtons
     names + helpers
   end
 
-  def self.config name = nil, &block 
+  def self.config name = nil, &block
     context = name ? "SocialButtons::#{name.to_s.camelize}".constantize : self
     block_given? ? yield(context) : context
   end
 
   # add class method for each social button registered
   names.each do |name|
-    (class << self; self; end).send :define_method, name do |&block|      
+    (class << self; self; end).send :define_method, name do |&block|
       clazz = "SocialButtons::#{name.to_s.camelize}".constantize
       block_given? ? clazz.instance_eval(&block) : clazz
     end

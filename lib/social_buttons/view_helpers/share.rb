@@ -1,11 +1,11 @@
 module SocialButtons
-  module Like
+  module Share
     include SocialButtons::Assistant
 
-    CLASS = "fb-like"
+    CLASS = "fb-share-button"
 
-    def like_button(app_id, options = {})
-      clazz = SocialButtons::Like
+    def share_button(app_id, options = {})
+      clazz = SocialButtons::Share
       params = clazz.options_to_data_params(clazz.default_options.merge(options))
       params.merge!(class: CLASS)
 
@@ -20,20 +20,15 @@ module SocialButtons
     class << self
       def default_options
         @default_options ||= {
-          send:    "false",
-          layout:  "button_count",
-          width:   "450",
-          action:  "like",
-          font:    "arial",
-          colorscheme: "light"
-        }.merge("show-faces" => "false")
+          layout:  "button_count"
+        }
       end
     end
 
     class Scripter < SocialButtons::Scripter
       def script(app_id)
-        return empty_content if widgetized?(:like) || widgetized?(:share)
-        widgetized! :like
+        return empty_content if widgetized?(:share) || widgetized?(:like)
+        widgetized! :share
         [
           "<script src=#{js_sdk} type='text/javascript'></script>",
           "<script>window.fbAsyncInit = function() { FB.init({ appId: '#{app_id}', status: true, cookie: true, xfbml: true }); };</script>",
