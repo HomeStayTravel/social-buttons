@@ -35,11 +35,26 @@ module SocialButtons
       end
     end
 
+    # Load twitter button once the load event has been fired
     class Scripter < SocialButtons::Scripter
       def script
         return empty_content if widgetized? :tweet
         widgetized! :tweet
-        "<script src=#{twitter_wjs} type='text/javascript'></script>".html_safe
+        [
+          "<script type='text/javascript' id='twitter_loading_sharebtn'>",
+            "(function(window, document, undefined){",
+              "window.addEventListener('load', function() {",
+                "var id = 'twitter_loading_sharebtn',",
+                  "target = document.getElementById(id),",
+                  "script = document.createElement('script');",
+                "script.async = true;",
+                "script.src = '#{twitter_wjs}';",
+                "script.id = id + '_script';",
+                "target.parentNode.insertBefore(script, target);",
+              "}, false);",
+            "})(window, document);",
+          "</script>"
+        ].join.html_safe
       end
 
       def twitter_wjs
