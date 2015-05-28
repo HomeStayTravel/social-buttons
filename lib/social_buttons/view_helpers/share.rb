@@ -25,13 +25,28 @@ module SocialButtons
       end
     end
 
+    # Load the Facebook script once the load event has been fired
     class Scripter < SocialButtons::Scripter
       def script(app_id)
         return empty_content if widgetized?(:share) || widgetized?(:like)
         widgetized! :share
         [
-          "<script src=#{js_sdk} type='text/javascript'></script>",
-          "<script>window.fbAsyncInit = function() { FB.init({ appId: '#{app_id}', status: true, cookie: true, xfbml: true }); };</script>",
+        "<script type='text/javascript'>",
+          "(function(window, document, undefined){",
+            "window.addEventListener('load', function() {",
+              "var id = 'fb-root',",
+                "target = document.getElementById(id),",
+                "script = document.createElement('script');",
+              "script.async = true;",
+              "script.src = '#{js_sdk}';",
+              "script.id = id + '_script';",
+              "target.parentNode.insertBefore(script, target);",
+            "}, false);",
+            "window.fbAsyncInit = function() {",
+              "FB.init({ appId: '#{app_id}', status: true, cookie: true, xfbml: true });",
+            "};",
+          "})(window, document);",
+        "</script>"
         ].join.html_safe
       end
 
