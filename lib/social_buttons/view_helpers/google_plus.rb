@@ -10,17 +10,17 @@ module SocialButtons
 
     def google_plus_button *args
       options = args.extract_options!
-      clazz = SocialButtons::GooglePlus
-      return clazz.script(options) if args.first == :script
+      klazz = SocialButtons::GooglePlus
+      return klazz.script(options) if args.first == :script
 
       locale = options.delete(:locale) || options.delete(:lang)
 
-      params = clazz.options_to_data_params(clazz.default_options.merge(options))
+      params = klazz.options_to_data_params(klazz.default_options.merge(options))
       params.merge!(class: CLASS)
 
       html = "".html_safe
       html << content_tag(:div, nil, params)
-      html << clazz::Scripter.new(self).script(locale)
+      html << klazz::Scripter.new(self).script(locale)
       html
     end
 
