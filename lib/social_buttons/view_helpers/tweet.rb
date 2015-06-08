@@ -19,6 +19,7 @@ module SocialButtons
 
       html = "".html_safe
       html << clazz::Scripter.new(self).script
+      html << content_tag(:div, nil, params)
       html
     end
 
