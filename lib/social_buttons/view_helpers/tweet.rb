@@ -19,7 +19,7 @@ module SocialButtons
 
       html = "".html_safe
       html << clazz::Scripter.new(self).script
-      html << link_to(TWITTER_SHARE_URL, params)
+      html << content_tag(:div, nil, params)
       html
     end
 
